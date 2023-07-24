@@ -1,0 +1,7 @@
+#ignore node_modules and env
+node_modules
+.env
+
+#ignore jsdoc
+out/
+docs/
