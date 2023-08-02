@@ -18,5 +18,11 @@ pipeline {
       }
     }
 
+    stage('test') {
+      steps {
+        sh 'npm i && npm run test'
+      }
+    }
+
   }
 }
