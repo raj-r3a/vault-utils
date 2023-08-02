@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Checkout code') {
+    stage('pipeline-try') {
       parallel {
         stage('Checkout code') {
           steps {
