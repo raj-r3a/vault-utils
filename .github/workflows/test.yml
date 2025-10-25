@@ -72,7 +72,16 @@ jobs:
       - name: Run integration test
         run: npm run test
 
+      - name: Upload test results
+        uses: actions/upload-artifact@v5
+        with:
+          name: test-results
+          path: test-results.json
+          retention-days: 1
+          overwrite: true
+
       - name: clean up
+        if: always()
         run: |
           curl --header "X-Vault-Token: $VAULT_TOKEN" \
           --request DELETE $VAULT_URL/v1/transit/keys/$ENCRYPTION_KEY_NAME || true
