@@ -1,5 +1,5 @@
 name: Vault-utils-integration-test
-run-name: {{ github.actor }} is testing vault-utils
+run-name: "${{ github.actor }} is testing vault-utils"
 
 on:
   push:
