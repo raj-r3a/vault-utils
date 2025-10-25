@@ -34,7 +34,7 @@ jobs:
           docker run -d --name vault -p 8200:8200  --cap-add=IPC_LOCK \
             -e VAULT_DEV_ROOT_TOKEN_ID=hvs.u07ot4OXvXTke9 \
             -e VAULT_DEV_LISTEN_ADDRESS="0.0.0.0:8200" \
-            hashicorp/vault:1.21 server -dev
+            hashicorp/vault:1.19 server -dev
             
           sleep 2
           docker ps -a
