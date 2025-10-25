@@ -46,17 +46,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --verbose
 
-      - name: check if Vault is running, if not wait
-        run: |
-          for i in {1..30}; do
-            RESPONSE=$(docker exec vault curl -s http://127.0.0.1:8200/v1/sys/health)
-            echo "Attempt $i: $RESPONSE"
-            if echo "$RESPONSE" | jq -e '.initialized==true and .sealed==false' >/dev/null; then
-              echo "Vault is ready"
-              break
-            fi
-            sleep 2
-          done
+      
 
       - name: Enable transit secrets engine
         run: |
