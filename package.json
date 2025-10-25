@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.shoppinpal.com:node-js/vault-utils.git"
+    "url": "git@github.com:raj-r3a/vault-utils.git"
   },
-  "author": "raj@shoppinpal.com",
+  "author": "rajkumar.r3a@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
