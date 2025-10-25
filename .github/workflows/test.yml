@@ -31,13 +31,13 @@ jobs:
 
       - name: Start Vault dev server
         run: |
-          docker run -d --name vault -p 8200:8200 \
+          docker run -d --name vault -p 8200:8200  --cap-add=IPC_LOCK \
             -e VAULT_DEV_ROOT_TOKEN_ID=hvs.u07ot4OXvXTke9 \
             -e VAULT_DEV_LISTEN_ADDRESS="0.0.0.0:8200" \
             hashicorp/vault:1.13.3 server -dev
             
           sleep 2
-          docker ps
+          docker ps -a
 
 
       - name: Install dependencies
@@ -46,13 +46,11 @@ jobs:
       - name: check if Vault is running, if not wait
         run: |
           for i in {1..30}; do
-            if curl -s $VAULT_URL/v1/sys/health | jq -e '.initialized == true and .sealed == false' >/dev/null; then
-              echo "Vault is running"
+            RESPONSE=$(docker exec vault curl -s http://127.0.0.1:8200/v1/sys/health)
+            echo "Attempt $i: $RESPONSE"
+            if echo "$RESPONSE" | jq -e '.initialized==true and .sealed==false' >/dev/null; then
+              echo "Vault is ready"
               break
-            fi
-            if [ $i -eq 30 ]; then
-              echo "Vault is not running, we reached the maximum wait time"
-              exit 1
             fi
             sleep 2
           done
