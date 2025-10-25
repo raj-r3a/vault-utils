@@ -15,7 +15,7 @@ jobs:
 
     services:
       vault:
-        image: hashicorp/vault:latest
+        image: hashicorp/vault:1.13.3
         ports:
           - 8200:8200
         env:
@@ -23,6 +23,7 @@ jobs:
           VAULT_DEV_LISTEN_ADDRESS: "0.0.0.0:8200"
         options: >-
           --cap-add=IPC_LOCK
+        command: ["vault", "server", "-dev"]
         
     env:
       VAULT_URL: http://vault:8200
